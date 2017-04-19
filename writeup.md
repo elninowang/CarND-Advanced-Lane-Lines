@@ -65,28 +65,16 @@ I used a combination of color and gradient thresholds to generate a binary image
 
 ####3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in the 4th code cell of the "./Advanced-Lane-Lines.ipynb").  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform includes a function, which appears in the 4th code cell of the "./Advanced-Lane-Lines.ipynb").  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
 
-```
-src = np.float32(
-    [[(img_size[0] / 2) - 60, img_size[1] / 2 + 100],
-     [((img_size[0] / 6) - 10), img_size[1]],
-     [(img_size[0] * 5 / 6) + 60, img_size[1]],
-     [(img_size[0] / 2 + 64), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-     [(img_size[0] / 4), img_size[1]],
-     [(img_size[0] * 3 / 4), img_size[1]],
-     [(img_size[0] * 3 / 4), 0]])
-```
 This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 580, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1126, 720     | 960, 720      |
-| 704, 460      | 960, 0        |
+| 579, 460      | 256, 0        | 
+| 203, 720      | 256, 720      |
+| 1126, 720     | 1024, 720      |
+| 703, 460      | 1024, 0        |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 in the 5th code cell of the "./Advanced-Lane-Lines.ipynb"
@@ -103,9 +91,9 @@ Then I did some other stuff and fit my lane lines with a 2nd order polynomial ki
 
 I did this in the 7th code cell of the "./Advanced-Lane-Lines.ipynb"
 
-radius of curvature: left:719.32m	righr:1634.51m	min:719.32m
+left:5173.52m	righr:2343.83m	min:2343.83m
 
-position of the vehicle with left to center 0.11m
+position of the vehicle with left to center -0.03m
 
 ####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
@@ -132,3 +120,9 @@ Here I'll talk about the approach I took, what techniques I used, what worked an
 i have 2 idea to imporve it 
 - hitgram not from left to right, i what to changed from middle to 2 sides
 - the 2 lines must be paralleled, can not be cross, i can use the the curvature becuase the 2 line curvature nearly the same
+
+But i use this to challenge_video.mp4 and harder_challenge_video.mp4 is not good.
+
+There are reasons may be failed: curve is very crooked, or have other things are similar to the line
+
+Maybe i must find another way to find curve
